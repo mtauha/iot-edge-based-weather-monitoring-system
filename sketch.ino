@@ -80,7 +80,20 @@ void loop()
     // LAYER 2: EDGE COMPUTING (Decision Making) TODO
     // ==========================================
     // We process data LOCALLY to make fast decisions before sending to cloud.
+    
+    String alertMsg = "Normal";
+    bool criticalEvent = false;
 
+    // Logic 1: Storm Detection
+    if (rainLevel > 70) {
+        alertMsg = "STORM ALERT!";
+        criticalEvent = true;
+    } 
+    // Logic 2: Heatwave Detection
+    else if (t > 35) {
+        alertMsg = "HEAT ALERT!";
+        criticalEvent = true;
+    }
 
     // ==========================================
     // LAYER 3: SYSTEM INTERFACE (Visualization) TODO
