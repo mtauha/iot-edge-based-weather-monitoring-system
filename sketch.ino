@@ -59,9 +59,22 @@ void setup()
 void loop()
 {
     // ==========================================
-    // LAYER 1: DATA ACQUISITION (Perception) TODO
+    // LAYER 1: DATA ACQUISITION (Perception) 
     // ==========================================
-    
+
+    float h = dht.readHumidity();
+    float t = dht.readTemperature();
+  
+    // Read Analog Rain Sensor (0-4095) and map to Percentage (0-100%)
+    int rawRain = analogRead(RAINPIN);
+    int rainLevel = map(rawRain, 0, 4095, 0, 100); 
+
+    // Error Check
+    if (isnan(h) || isnan(t)) {
+      Serial.println("Failed to read from DHT sensor!");
+      return;
+    }
+
 
     // ==========================================
     // LAYER 2: EDGE COMPUTING (Decision Making) TODO
