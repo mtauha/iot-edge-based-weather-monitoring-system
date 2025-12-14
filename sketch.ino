@@ -104,7 +104,26 @@ void loop()
     // LAYER 4: CLOUD COMMUNICATION (Reporting) TODO
     // ==========================================
     
-
+        if(WiFi.status()== WL_CONNECTED){
+    HTTPClient http;
+    
+    // Construct the REST API URL
+    String url = String(server) + "/update?api_key=" + apiKey + 
+                 "&field1=" + String(t) + 
+                 "&field2=" + String(h) + 
+                 "&field3=" + String(rainLevel);
+    
+    // Send the POST request
+    http.begin(url);
+    int httpCode = http.GET();
+    
+    if (httpCode > 0) {
+      Serial.printf("Cloud Sync Success. Code: %d\n", httpCode);
+    } else {
+      Serial.printf("Cloud Sync Failed. Code: %d\n", httpCode);
+    }
+    http.end();
+  }
     // ThingSpeak Free Tier allows updates every 15 seconds
     // This delay also helps "Power Consumption" (Source 83) by sleeping the radio
     delay(15000);
