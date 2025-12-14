@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "author": "SE Student",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -95.7,
+      "left": 71.4,
+      "attrs": { "temperature": "24", "humidity": "60" }
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": 127.46,
+      "left": 50.85,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "rainSensor",
+      "top": -80,
+      "left": -100,
+      "attrs": { "label": "Rain Level" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "dht1:VCC", "red", [ "v0" ] ],
+    [ "esp:GND", "dht1:GND", "black", [ "v0" ] ],
+    [ "esp:15", "dht1:SDA", "blue", [ "v0" ] ],
+    [ "esp:3V3", "oled1:VCC", "red", [ "v0" ] ],
+    [ "esp:GND", "oled1:GND", "black", [ "v0" ] ],
+    [ "esp:21", "oled1:SDA", "green", [ "v0" ] ],
+    [ "esp:22", "oled1:SCL", "yellow", [ "v0" ] ],
+    [ "rainSensor:GND", "esp:GND", "black", [ "v0" ] ],
+    [ "rainSensor:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "rainSensor:SIG", "esp:34", "purple", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
