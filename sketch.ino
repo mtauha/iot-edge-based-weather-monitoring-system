@@ -98,7 +98,28 @@ void loop()
     // ==========================================
     // LAYER 3: SYSTEM INTERFACE (Visualization) TODO
     // ==========================================
+    display.clearDisplay(); // Top Bar: WiFi Status
+    display.setTextSize(1); 
+    display.setCursor(0,0); 
+    display.print("WiFi: ON"); // Main Data 
+
+    display.setCursor(0, 15); 
+    display.print("Temp: "); 
+    display.print(t); 
+    display.println(" C"); 
+    display.print("Rain: "); 
+    display.print(rainLevel); 
+    display.println(" %"); // Alert Section (Dynamic) 
     
+    display.setCursor(0, 45); 
+    if(criticalEvent) { 
+        display.setTextSize(2); // Make text huge for alerts 
+        display.println(alertMsg); 
+    } else { 
+        display.setTextSize(1); 
+        display.println("Status: Safe"); 
+    } 
+    display.display();
 
     // ==========================================
     // LAYER 4: CLOUD COMMUNICATION (Reporting) TODO
